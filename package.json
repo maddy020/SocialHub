@@ -1,0 +1,19 @@
+{
+  "name": "socialhub",
+  "version": "1.0.0",
+  "description": "A website where Social Worlds Collide",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "social"
+  ],
+  "author": "Manika Goyal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "nodemon": "^3.1.0"
+  }
+}
