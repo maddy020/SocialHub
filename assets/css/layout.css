@@ -1,4 +1,29 @@
 body {
-  border: 0;
+  margin: 0;
   text-align: center;
+  overflow-x: hidden;
+  background-image: url("../images/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+footer {
+  background-color: #1a3d59;
+  padding: 1%;
+  font-size: 1.5rem;
+  position: fixed;
+  top: 92%;
+  z-index: 0;
+  width: 100%;
+  color: white;
+  left: 0px;
+}
+header {
+  background-color: #1a3d59;
+  padding: 1%;
+  font-size: 1.5rem;
+  color: white;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  left: 0px;
 }

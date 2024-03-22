@@ -1,0 +1,39 @@
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  margin-top: 5%;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #df773a;
+  font-weight: 900;
+}
+form {
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  width: 30%;
+  background-color: #bad6ea;
+}
+input {
+  margin: 1%;
+  padding: 1.5%;
+  width: 80%;
+  font-size: 1.1rem;
+  border: 0;
+}
+button {
+  margin: 3%;
+  padding: 1.5%;
+  width: 40%;
+  font-weight: 800;
+  font-size: 1.5rem;
+  background-color: #df773a;
+  color: white;
+  border: #df773a;
+}
