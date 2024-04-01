@@ -1,15 +1,18 @@
 const User = require("../models/user");
 module.exports.profile = async (req, res) => {
   try {
-    res.end("<h1>Hre Krishna...</h1>");
+    return res.render("user_profile", { title: "SocialHub | Profile" });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
 };
 module.exports.signUp = async (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   try {
-    res.render("user_sign_up", { title: "SocialHub | Sign Up" });
+    return res.render("user_sign_up", { title: "SocialHub | Sign Up" });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -17,7 +20,10 @@ module.exports.signUp = async (req, res) => {
 };
 module.exports.signIn = async (req, res) => {
   try {
-    res.render("user_sign_in", { title: "SocialHub | Sign In" });
+    if (req.isAuthenticated()) {
+      return res.redirect("/users/profile");
+    }
+    return res.render("user_sign_in", { title: "SocialHub | Sign In" });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -43,8 +49,25 @@ module.exports.create = async (req, res) => {
 };
 module.exports.createSession = async (req, res) => {
   try {
+    return res.redirect("/");
   } catch (err) {
     console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+module.exports.destroySession = (req, res) => {
+  try {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        res.status(500).send("Internal Server Error");
+        return;
+      }
+      res.redirect("/");
+    });
+  } catch (err) {
+    console.error("Error during logout:", err);
     res.status(500).send("Internal Server Error");
   }
 };

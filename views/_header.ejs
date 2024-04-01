@@ -1,1 +1,26 @@
-<header>Page Header</header>
+<header>
+  <div id="home">
+    <a id="icon" href="/"> <img src="/images/smile.png" /></a>
+    <span id="tag"
+      ><span style="color: #cebfe0">S</span>
+      <span style="color: #89a2a4">o</span>
+      <span style="color: #fda580">c</span>
+      <span style="color: #018680">i</span>
+      <span style="color: #aab7e8">a</span>
+      <span style="color: #ebbcd9">l</span>
+      <span style="color: #8fa13a">H</span>
+      <span style="color: #e07478">u</span>
+      <span style="color: #f4db67">b</span>
+    </span>
+  </div>
+
+  <ul>
+    <% if(locals.user) {%>
+    <li><a href="/users/profile"><%=user.name%></a></li>
+    <li><a href="/users/sign-out">Sign Out</a></li>
+    <%} else{%>
+    <li><a href="/users/sign-up">Sign Up</a></li>
+    <li><a href="/users/sign-in">Sign In </a></li>
+    <%}%>
+  </ul>
+</header>
