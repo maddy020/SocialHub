@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/css/home.css" />
+
+<li>
+  <div class="content">
+    <div class="comment-content">
+      <%= comment.content%>
+      <br />
+      <small style="font-style: italic">By~<%=comment.user.name %></small>
+    </div>
+
+    <div class="like">
+      <% if(locals.user && (locals.user.id == comment.user.id || locals.user.id
+      == post.user.id)) {%>
+      <small><a href="/comments/destroy/<%=comment.id%>">X</a></small>
+      <%}%>
+    </div>
+  </div>
+</li>

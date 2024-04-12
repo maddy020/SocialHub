@@ -1,5 +1,37 @@
 <link rel="stylesheet" href="/css/profile.css" />
-<h1 style="font-size: 4rem; text-align: center">Hre Krishna...</h1>
+<link rel="stylesheet" href="/css/profileasside.css" />
+<% if(user.id == profile_user.id) {%>
+<main>
+  <form action="/users/update/<%=profile_user.id%>" method="POST">
+    <h1>Update</h1>
+    <input
+      type="text"
+      name="name"
+      value="<%=profile_user.name%>"
+      placeholder="Your
+  Name"
+      required
+    />
+    <input
+      type="email"
+      name="email"
+      value="<%=profile_user.email%>"
+      placeholder="Your
+  Email"
+      required
+    />
+    <button type="submit" value="Update">Update</button>
+  </form>
+</main>
+<%} else {%>
+<aside>
+  <div class="pic">
+    <img src="/images/manika.jpg" />
+  </div>
+  <div class="info">
+    <p>Name : <%=profile_user.name%></p>
+    <p>Email : <%=profile_user.email%></p>
+  </div>
+</aside>
 
-<p>Name : <%=user.name%></p>
-<p>Email : <%=user.email%></p>
+<%}%>

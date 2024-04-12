@@ -1,10 +1,28 @@
 const User = require("../models/user");
 module.exports.profile = async (req, res) => {
   try {
-    return res.render("user_profile", { title: "SocialHub | Profile" });
+    const user = await User.findById(req.params.id);
+    if (user) {
+      return res.render("user_profile", {
+        title: "SocialHub | Profile",
+        profile_user: user,
+      });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
+  }
+};
+module.exports.update = async (req, res) => {
+  try {
+    console.log("yes");
+    if (req.user.id == req.params.id) {
+      await User.findByIdAndUpdate(req.params.id, req.body);
+      return res.redirect("back");
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Internal Server Error");
   }
 };
 module.exports.signUp = async (req, res) => {

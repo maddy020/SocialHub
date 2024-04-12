@@ -1,3 +1,165 @@
-h1 {
-  margin-top: 10%;
+.main {
+  margin-top: 5%;
+  display: flex;
+  justify-content: start;
+  .posts {
+    margin: 1%;
+    padding: 1%;
+    width: 50%;
+    h4 {
+      font-size: 2rem;
+      font-style: italic;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 3%;
+      textarea {
+        width: 100%;
+        padding: 1%;
+        font-size: 1.1rem;
+      }
+      .submit {
+        padding: 1%;
+        text-align: right;
+        font-style: italic;
+        background-color: #8fa13a;
+        color: white;
+        font-size: 1.4rem;
+        font-weight: 700;
+        border: none;
+      }
+    }
+    ul {
+      list-style-type: none;
+    }
+    .list {
+      margin: 2% 0% 10% 0%;
+      position: relative;
+      .content {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+
+        .post-content {
+          font-family: cursive;
+          overflow-wrap: break-word; /* Break long words */
+          word-break: break-word; /* Optional: more aggressive breaking */
+          white-space: normal; /* Ensures no nowrap is applied */
+          width: 80%;
+        }
+        .like {
+          display: flex;
+          flex-direction: column; /* Stack children vertically */
+          justify-content: right;
+          font-style: italic;
+          margin: 1%;
+          small {
+            text-align: right;
+          }
+        }
+      }
+      .comments {
+        input {
+          display: inline-block;
+          padding: 0.5%;
+          font-size: 1.2rem;
+        }
+        .comment-submit {
+          background-color: #89a2a4;
+          color: white;
+          text-align: left;
+          border: none;
+          font-style: italic;
+          font-weight: 600;
+        }
+        h4 {
+          font-size: 1.5rem;
+          font-style: italic;
+          text-align: left;
+        }
+        .content {
+          margin: 0% 0% 2% 1%;
+          .comment-content {
+            font-family: cursive;
+            overflow-wrap: break-word; /* Break long words */
+            word-break: break-word; /* Optional: more aggressive breaking */
+            white-space: normal; /* Ensures no nowrap is applied */
+            width: 80%;
+          }
+        }
+      }
+    }
+    .list::before {
+      content: "";
+      position: absolute;
+      left: -35px;
+      top: 2px; /* Adjust based on desired alignment */
+      width: 30px; /* Width of the image */
+      height: 30px; /* Height of the image */
+      background-image: url("/images/point.png");
+      background-size: cover; /* Cover might also be contain, depending on the desired effect */
+      background-repeat: no-repeat;
+    }
+  }
+  .friends {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    margin: 1%;
+    padding: 1%;
+    width: 15%;
+    h4 {
+      font-size: 2rem;
+      font-style: italic;
+      text-align: center;
+    }
+    .friend-list {
+      display: block; /* Make it respect padding and able to position children */
+      padding: 3%;
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      color: black;
+      margin-left: 10%;
+    }
+
+    .friend-list:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .main {
+    margin-top: 10%;
+  }
+  .main .friends {
+    width: 25%;
+  }
+  .main .friend .friend-list {
+    margin-left: 15%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .main {
+    margin-top: 10%;
+  }
+  .main .friends {
+    width: 50%;
+  }
+  .main .list .comments {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+  }
+  .main .friend .friend-list {
+    margin-left: 55%;
+  }
+  .main .posts .list .content .post-content {
+    width: 60%;
+  }
+  .main .posts .list::before {
+    width: 20px; /* Width of the image */
+    height: 20px; /* Height of the image */
+  }
 }

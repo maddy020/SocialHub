@@ -1,7 +1,6 @@
 <header>
-  <div id="home">
-    <a id="icon" href="/"> <img src="/images/smile.png" /></a>
-    <span id="tag"
+  <div class="home">
+    <a class="tag" href="/"
       ><span style="color: #cebfe0">S</span>
       <span style="color: #89a2a4">o</span>
       <span style="color: #fda580">c</span>
@@ -11,12 +10,12 @@
       <span style="color: #8fa13a">H</span>
       <span style="color: #e07478">u</span>
       <span style="color: #f4db67">b</span>
-    </span>
+    </a>
   </div>
 
   <ul>
     <% if(locals.user) {%>
-    <li><a href="/users/profile"><%=user.name%></a></li>
+    <li><a href="/"><%=user.name%></a></li>
     <li><a href="/users/sign-out">Sign Out</a></li>
     <%} else{%>
     <li><a href="/users/sign-up">Sign Up</a></li>

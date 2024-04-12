@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/home.css" />
+<li class="list">
+  <div class="content">
+    <div class="post-content"><%= post.content%></div>
+
+    <div class="like">
+      <small>By~ <%= post.user.name %></small>
+      <% if(locals.user && locals.user.id == post.user.id) { %>
+      <small><a href="/posts/destroy/<%=post.id%>">X</a></small>
+      <% } %>
+    </div>
+  </div>
+  <div class="comments">
+    <% if(locals.user){%>
+    <form action="comments/create" method="POST">
+      <input
+        class="text"
+        type="text"
+        name="content"
+        placeholder="Type comment here..."
+        required
+      />
+      <input type="hidden" name="post" value="<%=post._id%>" />
+      <input type="submit" value="Add Comment" class="comment-submit" />
+    </form>
+    <%}%>
+    <div>
+      <ul>
+        <% if(post.comments.length >0){%>
+        <h4>Comments...</h4>
+        <%}%> <% for(comment of post.comments) {%> <%- include('_comment.ejs')
+        -%> <%}%>
+      </ul>
+    </div>
+  </div>
+</li>

@@ -1,6 +1,7 @@
 <html>
   <head>
     <title><%= title%></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/footer.css" />
@@ -8,8 +9,9 @@
   </head>
   <body>
     <!--  partials having fix part of code -->
-    <%- include('_header'); -%>
-    <!--  layout where the body needs to be put in -->
-    <%- body %> <%- include('_footer'); -%> <%- script %>
+    <%- include('_header'); -%> <%- body %>
+    <!--  layout where the body needs to be put in 
+     <%- include('_footer'); -%>-->
+    <%- script %>
   </body>
 </html>
