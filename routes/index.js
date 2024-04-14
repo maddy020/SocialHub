@@ -8,5 +8,6 @@ router.use("/users", require("./users"));
 router.use("/posts", require("./posts"));
 router.use("/comments", require("./comments"));
 router.use("/api", require("./api"));
+router.use("/auth", require("./auth"));
 console.log("Router Loaded");
 module.exports = router;

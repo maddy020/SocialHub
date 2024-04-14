@@ -1,37 +1,61 @@
 const Comment = require("../models/comment");
 const Post = require("../models/post");
 const User = require("../models/user");
+const commentsMailer = require("../mailers/comments_mailer");
+const queue = require("../config/kue");
+const commentsEmailWorker = require("../workers/comment_email_worker");
 
 module.exports.create = async (req, res) => {
   try {
-    const post = await Post.findById(req.body.post);
+    let post = await Post.findById(req.body.post);
     if (post) {
-      const comment = await Comment.create({
+      let comment = await Comment.create({
         content: req.body.content,
         post: req.body.post,
         user: req.user._id,
       });
+
+      // Populate directly after creation and reassign to comment
+      comment = await Comment.findById(comment._id).populate(
+        "user",
+        "name email"
+      );
+      post = await Post.findById(req.body.post).populate("user", "name email");
+      //commentsMailer.newComment(comment);
+      //commentsMailer.newComment(post, comment);
+      const job = queue
+        .create("emails", { post, comment })
+        .save(function (err) {
+          if (err) {
+            console.log("error in creating queue!", err);
+            return;
+          }
+          //console.log(job.id, "manika");
+        });
       const user = await User.findById(req.user._id);
-      if (comment) {
-        post.comments.push(comment);
-        post.save();
-        if (req.xhr) {
-          return res.status(200).json({
-            data: {
-              comment: comment,
-              user: user,
-            },
-            message: "Comment Created!",
-          });
-        }
-        res.redirect("back");
+
+      post.comments.push(comment);
+      await post.save();
+
+      if (req.xhr) {
+        return res.status(200).json({
+          data: {
+            comment: comment,
+            user: user,
+          },
+          message: "Comment Created!",
+        });
       }
+      res.redirect("back");
+    } else {
+      res.status(404).send("Post not found");
     }
   } catch (err) {
-    console.error("comment", err);
+    console.error("Error in creating comment", err);
     return res.status(500).send("Internal Server Error");
   }
 };
+
 module.exports.destroy = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);
