@@ -1,8 +1,9 @@
 main {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  justify-content: space-evenly;
   form {
     margin-top: 10%;
     display: flex;
@@ -11,7 +12,6 @@ main {
     color: white;
     width: 30%;
     background-color: #bad6ea;
-
     h1 {
       margin-top: 5%;
       font-size: 2.5rem;
@@ -35,6 +35,23 @@ main {
       border: #d2dc97;
     }
   }
+  p {
+    width: 20%;
+
+    text-align: center;
+
+    padding: 1%;
+    background-color: #01464d;
+  }
+  p .google {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-style: italic;
+    font-size: 1.8rem;
+    width: 100%;
+    font-weight: 700;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -53,6 +70,12 @@ main {
   main form {
     width: 50%;
   }
+  main p {
+    width: 30%;
+  }
+  main p .google {
+    font-size: 1.5rem;
+  }
 }
 
 @media only screen and (max-width: 700px) {
@@ -63,14 +86,7 @@ main {
     width: 60%;
   }
 }
-@media only screen and (max-width: 700px) {
-  main {
-    margin-top: 10%;
-  }
-  main form {
-    width: 60%;
-  }
-}
+
 @media only screen and (max-width: 500px) {
   main {
     margin-top: 18%;
@@ -82,5 +98,11 @@ main {
   main form {
     width: 70%;
     padding: 2%;
+  }
+  main form button {
+    width: 60%;
+  }
+  main p {
+    width: 50%;
   }
 }

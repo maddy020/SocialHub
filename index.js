@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
 const port = 8000;
+const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/mongoose");
 //used for session cookie
@@ -10,8 +11,12 @@ const session = require("express-session");
 
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
+const passportJWT = require("./config/passport-jwt-strategy");
+const passportGoogle = require("./config/passport-google-oauth-strategy2");
 const MongoStore = require("connect-mongo");
 const sassMiddleware = require("node-sass-middleware");
+const flash = require("connect-flash");
+const customMware = require("./config/middleware");
 app.use(
   sassMiddleware({
     src: "./assets/scss",
@@ -24,6 +29,9 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static("./assets"));
+//make the upload path available to browser
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 app.use(expressLayouts);
 //extract link (style) and script from sub pages to layout
 app.set("layout extractStyles", true);
@@ -60,6 +68,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+app.use(flash());
+app.use(customMware.setFlash);
 //use express router
 app.use("/", require("./routes/index"));
 app.listen(port, async (err) => {

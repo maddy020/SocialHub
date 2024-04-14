@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const fs = require("fs");
+const path = require("path");
 module.exports.profile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -15,11 +17,35 @@ module.exports.profile = async (req, res) => {
 };
 module.exports.update = async (req, res) => {
   try {
-    console.log("yes");
-    if (req.user.id == req.params.id) {
-      await User.findByIdAndUpdate(req.params.id, req.body);
+    let user = await User.findById(req.params.id);
+    User.uploadedAvatar(req, res, function (err) {
+      if (err) {
+        console.log("Multer Err", err);
+      }
+      user.name = req.body.name;
+      user.email = req.body.email;
+      if (req.file) {
+        if (user.avatar) {
+          const avatarPath = path.join(__dirname, "..", user.avatar);
+
+          try {
+            if (fs.existsSync(avatarPath)) {
+              fs.unlinkSync(avatarPath);
+            }
+          } catch (error) {
+            console.error("Error deleting avatar:", error);
+          }
+        }
+
+        user.avatar = User.avatarPath + "/" + req.file.filename;
+        avatarPath = path.join(__dirname, "..", user.avatar);
+        if (fs.existsSync(avatarPath) == false) {
+          user.avatar = NULL;
+        }
+      }
+      user.save();
       return res.redirect("back");
-    }
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).send("Internal Server Error");
@@ -67,6 +93,7 @@ module.exports.create = async (req, res) => {
 };
 module.exports.createSession = async (req, res) => {
   try {
+    req.flash("success", "Logged in Successfully");
     return res.redirect("/");
   } catch (err) {
     console.error(err);
@@ -74,16 +101,18 @@ module.exports.createSession = async (req, res) => {
   }
 };
 
-module.exports.destroySession = (req, res) => {
+module.exports.destroySession = async (req, res, next) => {
   try {
-    req.session.destroy((err) => {
+    req.logOut(function (err) {
       if (err) {
-        console.error("Error destroying session:", err);
-        res.status(500).send("Internal Server Error");
-        return;
+        return next(err);
       }
-      res.redirect("/");
+      // Set the flash message after successfully logging out
+      req.flash("success", "Logged out!");
+      // Then redirect
+      return res.redirect("/users/sign-in");
     });
+    // Note: req.session.destroy() is not called explicitly here. If needed, ensure it happens after setting flash
   } catch (err) {
     console.error("Error during logout:", err);
     res.status(500).send("Internal Server Error");

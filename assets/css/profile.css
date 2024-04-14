@@ -1,10 +1,25 @@
 main {
   width: 100%;
+  margin-top: 10%;
   display: flex;
-  flex-direction: column;
-  align-items: center; }
+  justify-content: space-evenly; }
+  main .pic {
+    border-radius: 50%;
+    height: 55vh;
+    width: 24%;
+    box-shadow: 3px 1px 1px 2px #ebbcd9; }
+    main .pic img {
+      border-radius: 50%;
+      height: 100%;
+      width: 100%; }
+    main .pic .info {
+      display: flex;
+      flex-direction: column; }
+      main .pic .info p {
+        font-size: 1.5rem;
+        font-family: cursive;
+        padding: 1%; }
   main form {
-    margin-top: 10%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -12,17 +27,20 @@ main {
     width: 30%;
     background-color: #bad6ea; }
     main form h1 {
-      margin-top: 5%;
+      margin-top: 10%;
       font-size: 2.5rem;
       text-align: center; }
     main form input {
-      margin: 1%;
+      margin: 2%;
       padding: 1.5%;
       width: 80%;
       font-size: 1.1rem;
       border: 0; }
+    main form .file {
+      color: black;
+      background-color: whitesmoke; }
     main form button {
-      margin: 3%;
+      margin: 2%;
       padding: 1.5%;
       width: 40%;
       font-weight: 800;
@@ -31,36 +49,72 @@ main {
       color: white;
       border: #d2dc97; }
 
+@media only screen and (max-width: 1475px) {
+  main {
+    margin-top: 15%; }
+  main form {
+    width: 35%; }
+  main .pic {
+    height: 50vh;
+    width: 30%; } }
+
 @media only screen and (max-width: 1200px) {
   main {
-    margin-top: 5%; }
-  main form {
-    width: 40%; } }
+    margin-top: 20%; }
+  main .pic {
+    height: 50vh;
+    width: 30%; } }
 
 @media only screen and (max-width: 1000px) {
   main {
-    margin-top: 10%; }
+    margin-top: 25%; }
+  main .pic {
+    height: 40vh;
+    width: 32%; }
   main form {
-    width: 50%; } }
+    width: 40%; }
+  main form button {
+    margin: 5%; } }
 
-@media only screen and (max-width: 700px) {
-  main {
-    margin-top: 10%; }
+@media only screen and (max-width: 750px) {
   main form {
-    width: 60%; } }
-
-@media only screen and (max-width: 700px) {
+    width: 45%; }
   main {
-    margin-top: 10%; }
-  main form {
-    width: 60%; } }
-
-@media only screen and (max-width: 500px) {
-  main {
-    margin-top: 18%; }
+    margin-top: 35%; }
+  main .pic {
+    height: 35vh;
+    width: 33%; }
   main form h1 {
-    margin-top: 2%;
-    font-size: 2rem; }
+    font-size: 1.9rem; }
+  main font input {
+    font-size: 0.9rem; } }
+
+@media only screen and (max-width: 550px) {
+  main {
+    flex-direction: column;
+    align-items: center; }
+  main .pic {
+    height: 37vh;
+    width: 52%; }
   main form {
-    width: 70%;
-    padding: 2%; } }
+    margin-top: 10%;
+    width: 60%; }
+  main form button {
+    width: 50%; }
+  main form {
+    width: 70%; }
+  main .pic .info {
+    height: 0;
+    width: 0;
+    overflow: hidden; } }
+
+@media only screen and (max-width: 300px) {
+  main {
+    margin-top: 35%; }
+  main form {
+    width: 75%; }
+  main form button {
+    width: 55%; }
+  main .pic {
+    height: 35vh;
+    width: 55%; } }

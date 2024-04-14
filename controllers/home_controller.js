@@ -10,9 +10,11 @@ module.exports.home = async (req, res) => {
       });
     } */
     const posts = await Post.find({})
+      .sort("-createdAt")
       .populate("user")
       .populate({
         path: "comments",
+        options: { sort: { createdAt: -1 } },
         populate: {
           path: "user",
         },

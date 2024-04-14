@@ -1,18 +1,26 @@
 <link rel="stylesheet" href="/css/home.css" />
-<li class="list">
+<li id="post-<%=post.id%>" class="list">
   <div class="content">
     <div class="post-content"><%= post.content%></div>
 
     <div class="like">
       <small>By~ <%= post.user.name %></small>
       <% if(locals.user && locals.user.id == post.user.id) { %>
-      <small><a href="/posts/destroy/<%=post.id%>">X</a></small>
+      <small
+        ><a href="/posts/destroy/<%=post.id%>" class="delete-post-button"
+          >X</a
+        ></small
+      >
       <% } %>
     </div>
   </div>
   <div class="comments">
     <% if(locals.user){%>
-    <form action="comments/create" method="POST">
+    <form
+      action="comments/create"
+      method="POST"
+      id="post-<%=post._id%>-comment-form"
+    >
       <input
         class="text"
         type="text"
@@ -24,12 +32,13 @@
       <input type="submit" value="Add Comment" class="comment-submit" />
     </form>
     <%}%>
-    <div>
-      <ul>
-        <% if(post.comments.length >0){%>
-        <h4>Comments...</h4>
-        <%}%> <% for(comment of post.comments) {%> <%- include('_comment.ejs')
-        -%> <%}%>
+    <div id="post-comments-list">
+      <% if(post.comments.length >0){%>
+      <h4>Comments...</h4>
+      <%}%>
+      <ul id="post-comments-<%=post._id%>">
+        <% for(comment of post.comments) {%> <%- include('_comment.ejs') -%>
+        <%}%>
       </ul>
     </div>
   </div>

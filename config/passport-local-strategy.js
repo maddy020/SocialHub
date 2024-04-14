@@ -6,16 +6,18 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
+      passReqToCallback: true,
     },
-    async (email, password, done) => {
+    async (req, email, password, done) => {
       try {
         const user = await User.findOne({ email: email });
         if (!user || user.password != password) {
+          req.flash("error", "Invalid UserName/Password");
           return done(null, false);
         }
         return done(null, user);
       } catch (err) {
-        console.log(err);
+        req.flash("error", err);
         return done(err);
       }
     }
@@ -40,6 +42,7 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 passport.checkAuthentication = async (req, res, next) => {
+  console.log(req.user);
   if (req.isAuthenticated()) {
     return next();
   }
