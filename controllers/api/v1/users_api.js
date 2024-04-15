@@ -1,5 +1,6 @@
 const User = require("../../../models/user");
 const jwt = require("jsonwebtoken");
+const env = require("../../../config/environment");
 module.exports.createSession = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -10,7 +11,7 @@ module.exports.createSession = async (req, res) => {
     }
     return res.status(200).json({
       message: "Sign in successful here is ur token!",
-      token: jwt.sign(user.toJSON(), "socialhub", { expiresIn: "100000" }),
+      token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" }),
     });
   } catch (err) {
     console.log("***", err);

@@ -1,4 +1,6 @@
 const express = require("express");
+const env = require("./config/environment");
+const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const app = express();
 const port = 8000;
@@ -22,21 +24,26 @@ const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_socket").chatSockets(chatServer);
 chatServer.listen(5000);
 console.log("Chat server is listening on port 5000");
-app.use(
-  sassMiddleware({
-    src: "./assets/scss",
-    dest: "./assets/css",
-    debug: true,
-    outputStyle: "extended",
-    prefix: "/css",
-  })
-);
+if (env.name == "devlopment") {
+  app.use(
+    sassMiddleware({
+      src: path.join(__dirname, env.asset_path, "scss"),
+      dest: path.join(__dirname, env.asset_path, "css"),
+      debug: true,
+      outputStyle: "extended",
+      prefix: "/css",
+    })
+  );
+}
+
+console.log(path.join(__dirname, env.asset_path, "scss"));
+console.log(path.join(__dirname, env.asset_path, "css"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static("./assets"));
+app.use(express.static(env.asset_path));
 //make the upload path available to browser
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
+app.use(logger(env.morgan.mode, env.morgan.options));
 app.use(expressLayouts);
 //extract link (style) and script from sub pages to layout
 app.set("layout extractStyles", true);
@@ -48,7 +55,7 @@ app.set("views", "./views");
 app.use(
   session({
     name: "SocialHub",
-    secret: "blahsomething",
+    secret: env.session_cookie_key,
     store: MongoStore.create(
       {
         mongoUrl: "mongodb://127.0.0.1:27017/socialhub_development",

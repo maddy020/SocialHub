@@ -1,18 +1,9 @@
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
-
+const env = require("./environment");
 // Configure the transporter for sending emails
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com", // corrected the host name
-  port: 587,
-  secure: false, // `false` for port 587, `true` for 465
-  auth: {
-    user: "we.socialhubsite@gmail.com",
-    pass: "llky gnfy uulw dhtk",
-  },
-});
+const transporter = nodemailer.createTransport(env.smtp);
 
 // Define function to render email templates
 //renders view from the ejs
