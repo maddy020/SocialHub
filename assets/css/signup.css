@@ -10,6 +10,7 @@ main {
     align-items: center;
     flex-direction: column;
     color: white;
+    border: 1px dashed white;
     width: 30%;
     background-color: #bad6ea; }
     main form h1 {
@@ -28,14 +29,15 @@ main {
       width: 40%;
       font-weight: 800;
       font-size: 1.5rem;
+      border: 1px dashed white;
       background-color: #d2dc97;
-      color: white;
-      border: #d2dc97; }
+      color: white; }
   main p {
     width: 20%;
     text-align: center;
-    padding: 1%;
-    background-color: #01464d; }
+    padding: 0.3%;
+    background-color: darkcyan;
+    border: 1px dashed white; }
   main p .google {
     display: inline-block;
     color: white;

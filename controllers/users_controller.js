@@ -1,13 +1,32 @@
 const User = require("../models/user");
+const Friend = require("../models/friend");
 const fs = require("fs");
 const path = require("path");
 module.exports.profile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    let friends;
+    if (req.user) {
+      friends = await Friend.find({ from_user: req.user.id }).populate([
+        "from_user",
+        "to_user",
+      ]);
+      console.log("friends", friends);
+    }
+    let existfr = await Friend.findOne({
+      to_user: req.params.id,
+      from_user: req.user.id,
+    });
+    let friend = false;
+    if (existfr) {
+      friend = true;
+    }
     if (user) {
       return res.render("user_profile", {
         title: "SocialHub | Profile",
         profile_user: user,
+        friend,
+        friends,
       });
     }
   } catch (err) {

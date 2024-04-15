@@ -1,0 +1,100 @@
+//add styling for the chat box
+#user-chat-box {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  border: 1px dashed grey;
+  height: 350px;
+  width: 300px;
+  background: white;
+  padding: 5px;
+  box-shadow: 1px 1px 1px 1px lightgrey;
+
+  #chat-messages-list {
+    list-style: none;
+    padding: 10px;
+    height: 70%;
+    background-color: white;
+    overflow: auto;
+
+    .other-message {
+      text-align: left;
+      padding: 5px;
+      span {
+        display: inline-block;
+        padding: 15px;
+        background-color: #ffa0a0;
+      }
+    }
+
+    .self-message {
+      text-align: right;
+      padding: 5px;
+
+      span {
+        display: inline-block;
+        padding: 15px;
+        background-color: #a0dcff;
+      }
+    }
+  }
+  #chat-message-input-container {
+    height: 24%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    #chat-message-input {
+      height: 50%;
+      width: 70%;
+    }
+
+    #send-message {
+      height: 50%;
+      width: 30%;
+      font-size: 25px;
+      color: white;
+      border: none;
+      background: #58d258;
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  #user-chat-box {
+    height: 360px;
+    width: 280px;
+  }
+}
+@media only screen and (max-width: 950px) {
+  #user-chat-box {
+    height: 320px;
+    width: 227px;
+  }
+}
+@media only screen and (max-width: 770px) {
+  #user-chat-box {
+    height: 270px;
+    width: 170px;
+  }
+  #user-chat-box #chat-message-input-container #send-message {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  #user-chat-box {
+    height: 280px;
+    width: 150px;
+  }
+  #user-chat-box #chat-message-input-container #send-message {
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  #user-chat-box {
+    height: 290px;
+    width: 130px;
+  }
+  #user-chat-box #chat-message-input-container #send-message {
+    font-size: 8px;
+  }
+}

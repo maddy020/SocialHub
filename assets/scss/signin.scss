@@ -10,6 +10,7 @@ main {
     align-items: center;
     flex-direction: column;
     color: white;
+    border: 1px dashed white;
     width: 30%;
     background-color: #bad6ea;
     h1 {
@@ -21,6 +22,7 @@ main {
       margin: 1%;
       padding: 1.5%;
       width: 80%;
+
       font-size: 1.1rem;
       border: 0;
     }
@@ -30,9 +32,9 @@ main {
       width: 40%;
       font-weight: 800;
       font-size: 1.5rem;
+      border: 1px dashed white;
       background-color: #d2dc97;
       color: white;
-      border: #d2dc97;
     }
   }
   p {
@@ -40,8 +42,9 @@ main {
 
     text-align: center;
 
-    padding: 1%;
-    background-color: #01464d;
+    padding: 0.3%;
+    background-color: darkcyan;
+    border: 1px dashed white;
   }
   p .google {
     display: inline-block;

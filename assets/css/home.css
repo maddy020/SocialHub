@@ -17,9 +17,12 @@
       .main .posts form textarea {
         width: 100%;
         padding: 1%;
+        margin: 1%;
         font-size: 1.1rem; }
       .main .posts form .submit {
         padding: 1%;
+        margin: 1%;
+        width: 100%;
         text-align: right;
         font-style: italic;
         background-color: #8fa13a;
@@ -35,7 +38,8 @@
       .main .posts .list .content {
         display: flex;
         justify-content: space-between;
-        font-size: 1.3rem; }
+        font-size: 1.3rem;
+        margin-bottom: 1%; }
         .main .posts .list .content .post-content {
           font-family: cursive;
           overflow-wrap: break-word;
@@ -54,6 +58,9 @@
           margin: 1%; }
           .main .posts .list .content .like small {
             text-align: right; }
+            .main .posts .list .content .like small a {
+              text-decoration: none;
+              color: red; }
       .main .posts .list .comments input {
         display: inline-block;
         padding: 0.5%;
@@ -96,7 +103,7 @@
       background-repeat: no-repeat; }
   .main .friends {
     border-left: 2px solid black;
-    border-right: 2px solid black;
+    border-top: 2px solid black;
     margin: 1%;
     padding: 1%;
     width: 15%; }
@@ -119,20 +126,18 @@
 @media only screen and (max-width: 1200px) {
   .main {
     margin-top: 10%; }
-  .main .friends {
-    width: 25%; }
   .main .friend .friend-list {
     margin-left: 15%; } }
 
 @media only screen and (max-width: 600px) {
   .main {
     margin-top: 10%; }
-  .main .friends {
-    width: 50%; }
-  .main .list .comments {
-    height: 0;
-    width: 0;
-    overflow: hidden; }
+  .main .posts .list .comments input {
+    font-size: 0.8rem; }
+  .main .posts .list .comments h4 {
+    font-size: 1rem; }
+  main .posts .list .content {
+    font-size: 0.9rem; }
   .main .friend .friend-list {
     margin-left: 55%; }
   .main .posts .list .content .post-content {
@@ -142,3 +147,13 @@
     /* Width of the image */
     height: 20px;
     /* Height of the image */ } }
+
+@media only screen and (max-width: 1200px) {
+  .main {
+    margin-top: 10%; }
+  .main .friend .friend-list {
+    margin-left: 15%; } }
+
+@media only screen and (max-width: 500px) {
+  .main .posts {
+    width: 45%; } }

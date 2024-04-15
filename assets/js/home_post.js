@@ -9,11 +9,12 @@
         url: "/posts/create",
         data: newPostForm.serialize(),
         success: function (data) {
-          let newPost = newPostDOM(data.data);
+          let newPost = newPostDOM(data.data.post);
           //console.log(data.data);
           $("#posts-list-container>ul").prepend(newPost);
           deletePost($(" .delete-post-button"), newPost);
           new PostComments(data.data.post._id);
+          new ToggleLike($(" .likes", newPost));
           new Noty({
             theme: "relax",
             text: "Post Published!",
@@ -30,17 +31,25 @@
   };
 
   //method to create post using DOM
-  //data.data=post
+
   let newPostDOM = function (post) {
-    return $(`<li id="post-${post.post._id}" class="list">
+    return $(`<li id="post-${post._id}" class="list">
   <div class="content">
-    <div class="post-content">${post.post.content}</div>
+    <div class="post-content">${post.content}</div>
 
     <div class="like">
       <small>By~ ${post.user.name}</small>
-     
+       <small>
+        <a
+          href="/likes/toggle?id=${post._id}&type=Post"
+          class="likes"
+          data-likes="${post.likes.length}"
+        >
+          ${post.likes.length} Like
+        </a>
+      </small>
       <small
-        ><a href="/posts/destroy/${post.post._id}" class="delete-post-button"
+        ><a href="/posts/destroy/${post._id}" class="delete-post-button"
           >X</a
         ></small
       >
@@ -52,7 +61,7 @@
     <form
       action="comments/create"
       method="POST"
-      id="post-${post.post._id}-comment-form"
+      id="post-${post._id}-comment-form"
     >
       <input
         class="text"
@@ -61,13 +70,13 @@
         placeholder="Type comment here..."
         required
       />
-      <input type="hidden" name="post" value="${post.post._id}" />
+      <input type="hidden" name="post" value="${post._id}" />
       <input type="submit" value="Add Comment" class="comment-submit" />
     </form>
     
     <div id="post-comments-list">
      
-      <ul id="post-comments-${post.post._id}">
+      <ul id="post-comments-${post._id}">
        
       </ul>
     </div>
@@ -113,6 +122,8 @@
       let postId = self.prop("id").split("-")[1];
       //console.log(postId);
       const onj = new PostComments(postId);
+      new ToggleLike($(" .likes", self));
+      new ToggleLike($(" .comment-likes", self));
       //console.log(onj);
     });
   };

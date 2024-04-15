@@ -24,10 +24,11 @@ class PostComments {
         type: "POST",
         data: $(self).serialize(),
         success: function (data) {
-          let newComment = pself.newCommentDom(data.data);
+          let newComment = pself.newCommentDom(data.data.comment);
           //console.log(data.data.user);
           $(`#post-comments-${postId}`).prepend(newComment);
           pself.deleteComment($(" .delete-comment-button", newComment));
+          new ToggleLike($(" .comment-likes", newComment));
           new Noty({
             theme: "relax",
             text: "Comment Posted!",
@@ -46,19 +47,27 @@ class PostComments {
   newCommentDom(comment) {
     // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
     return $(`
-   <li id="comment-${comment.comment._id}">
+   <li id="comment-${comment._id}">
   <div class="content">
     <div class="comment-content">
-      ${comment.comment.content}
+      ${comment.content}
       <br />
       <small style="font-style: italic">By~${comment.user.name}</small>
     </div>
 
     <div class="like">
-      
+       <small>
+        <a
+          href="/likes/toggle?id=${comment._id}&type=Comment"
+          class="comment-likes"
+          data-likes="${comment.likes.length}"
+        >
+          ${comment.likes.length} Like
+        </a></small
+      >
       <small
         ><a
-          href="/comments/destroy/${comment.comment._id}"
+          href="/comments/destroy/${comment._id}"
           class="delete-comment-button"
           >X</a
         ></small

@@ -1,16 +1,23 @@
-<link rel="stylesheet" href="/css/home.css" />
 <li id="post-<%=post.id%>" class="list">
   <div class="content">
     <div class="post-content"><%= post.content%></div>
 
     <div class="like">
       <small>By~ <%= post.user.name %></small>
-      <% if(locals.user && locals.user.id == post.user.id) { %>
-      <small
-        ><a href="/posts/destroy/<%=post.id%>" class="delete-post-button"
-          >X</a
-        ></small
-      >
+      <%if(locals.user){%>
+      <small>
+        <a
+          href="/likes/toggle?id=<%=post._id%>&type=Post"
+          class="likes"
+          data-likes="<%= post.likes.length %>"
+        >
+          <%= post.likes.length %> Like
+        </a>
+      </small>
+      <%}else{%> <%= post.likes.length %> Like <%}%> <% if(locals.user &&
+      locals.user.id == post.user.id) { %>
+
+      <small><a href="/posts/destroy/<%=post.id%>">X</a></small>
       <% } %>
     </div>
   </div>

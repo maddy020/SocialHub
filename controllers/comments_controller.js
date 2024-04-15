@@ -4,7 +4,7 @@ const User = require("../models/user");
 const commentsMailer = require("../mailers/comments_mailer");
 const queue = require("../config/kue");
 const commentsEmailWorker = require("../workers/comment_email_worker");
-
+const Like = require("../models/like");
 module.exports.create = async (req, res) => {
   try {
     let post = await Post.findById(req.body.post);
@@ -16,10 +16,7 @@ module.exports.create = async (req, res) => {
       });
 
       // Populate directly after creation and reassign to comment
-      comment = await Comment.findById(comment._id).populate(
-        "user",
-        "name email"
-      );
+      comment = await comment.populate(["user , likes"]);
       post = await Post.findById(req.body.post).populate("user", "name email");
       //commentsMailer.newComment(comment);
       //commentsMailer.newComment(post, comment);
@@ -41,7 +38,6 @@ module.exports.create = async (req, res) => {
         return res.status(200).json({
           data: {
             comment: comment,
-            user: user,
           },
           message: "Comment Created!",
         });
@@ -62,6 +58,7 @@ module.exports.destroy = async (req, res) => {
     const post = await Post.findById(comment.post);
     if (comment && (comment.user == req.user.id || post.user == req.user.id)) {
       const postId = comment.post;
+      await Like.deleteMany({ likeable: comment, onModel: "Comment" });
       await Comment.findByIdAndDelete(req.params.id);
       await Post.findByIdAndUpdate(postId, {
         $pull: { comments: req.params.id },

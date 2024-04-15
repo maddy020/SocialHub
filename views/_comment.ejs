@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="/css/home.css" />
-
 <li id="comment-<%=comment.id%>">
   <div class="content">
     <div class="comment-content">
@@ -9,8 +7,19 @@
     </div>
 
     <div class="like">
-      <% if(locals.user && (locals.user.id == comment.user.id || locals.user.id
-      == post.user.id)) {%>
+      <%if(locals.user){%>
+      <small>
+        <a
+          href="/likes/toggle?id=<%=comment._id%>&type=Comment"
+          class="comment-likes"
+          data-likes="<%= comment.likes.length %>"
+        >
+          <%= comment.likes.length %> Like
+        </a></small
+      >
+
+      <%}else{%> <%= comment.likes.length %> Like <%}%> <% if(locals.user &&
+      (locals.user.id == comment.user.id || locals.user.id == post.user.id)) {%>
       <small
         ><a
           href="/comments/destroy/<%=comment.id%>"
@@ -18,6 +27,7 @@
           >X</a
         ></small
       >
+
       <%}%>
     </div>
   </div>

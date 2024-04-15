@@ -1,12 +1,13 @@
 main {
   width: 100%;
-  margin-top: 10%;
+  margin-top: 7%;
   display: flex;
   justify-content: space-evenly; }
   main .pic {
     border-radius: 50%;
-    height: 55vh;
+    height: 50vh;
     width: 24%;
+    margin: 1%;
     box-shadow: 3px 1px 1px 2px #ebbcd9; }
     main .pic img {
       border-radius: 50%;
@@ -18,13 +19,15 @@ main {
       main .pic .info p {
         font-size: 1.5rem;
         font-family: cursive;
-        padding: 1%; }
+        padding: 0.5%; }
   main form {
     display: flex;
     align-items: center;
     flex-direction: column;
     color: white;
-    width: 30%;
+    width: 25%;
+    margin-top: 1%;
+    border: 1px dashed white;
     background-color: #bad6ea; }
     main form h1 {
       margin-top: 10%;
@@ -47,11 +50,32 @@ main {
       font-size: 1.5rem;
       background-color: #d2dc97;
       color: white;
+      border: 1px dashed white;
       border: #d2dc97; }
+  main .friends-list {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px dashed grey;
+    border-top: 1px dashed grey; }
+    main .friends-list ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      list-style-type: none; }
+      main .friends-list ul h1 {
+        font-style: italic; }
+      main .friends-list ul li {
+        padding: 2% 0%; }
+        main .friends-list ul li a {
+          display: inline-block;
+          text-decoration: none;
+          font-family: cursive;
+          font-size: 1.5rem;
+          color: black; }
 
 @media only screen and (max-width: 1475px) {
   main {
-    margin-top: 15%; }
+    margin-top: 13%; }
   main form {
     width: 35%; }
   main .pic {
@@ -60,17 +84,19 @@ main {
 
 @media only screen and (max-width: 1200px) {
   main {
-    margin-top: 20%; }
+    margin-top: 17%; }
   main .pic {
     height: 50vh;
     width: 30%; } }
 
 @media only screen and (max-width: 1000px) {
   main {
-    margin-top: 25%; }
+    margin-top: 23%; }
   main .pic {
     height: 40vh;
     width: 32%; }
+  main .pic .info p {
+    font-size: 1.3rem; }
   main form {
     width: 40%; }
   main form button {
@@ -78,27 +104,38 @@ main {
 
 @media only screen and (max-width: 750px) {
   main form {
-    width: 45%; }
+    width: 45%;
+    margin: 2%; }
+  main .pic .info p {
+    font-size: 1rem; }
   main {
-    margin-top: 35%; }
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center; }
+  main .friends-list {
+    margin-left: 15%;
+    margin-top: 5%; }
   main .pic {
-    height: 35vh;
-    width: 33%; }
+    height: 30vh;
+    width: 30%; }
   main form h1 {
     font-size: 1.9rem; }
   main font input {
-    font-size: 0.9rem; } }
+    font-size: 0.9rem; }
+  main form button {
+    width: 50%; } }
 
 @media only screen and (max-width: 550px) {
-  main {
-    flex-direction: column;
-    align-items: center; }
   main .pic {
     height: 37vh;
     width: 52%; }
+  main .friends-list {
+    margin-left: 0%;
+    margin-top: 5%; }
   main form {
-    margin-top: 10%;
-    width: 60%; }
+    margin-top: 5%;
+    width: 50%; }
   main form button {
     width: 50%; }
   main form {
@@ -108,9 +145,9 @@ main {
     width: 0;
     overflow: hidden; } }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 350px) {
   main {
-    margin-top: 35%; }
+    margin-top: 30%; }
   main form {
     width: 75%; }
   main form button {

@@ -56,6 +56,9 @@ header {
   header ul {
     width: 40%;
   }
+  header ul li a {
+    font-size: 1.5rem;
+  }
 }
 @media only screen and (max-width: 800px) {
   header .home .tag {
@@ -88,9 +91,6 @@ header {
   }
   header ul {
     width: 50%;
-  }
-  header ul li a {
-    font-size: 1rem;
   }
 }
 @media only screen and (max-width: 300px) {

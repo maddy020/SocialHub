@@ -43,7 +43,20 @@
     />
     <button type="submit" value="Update">Update</button>
   </form>
+  <div class="friends-list">
+    <ul>
+      <h1>Friends</h1>
+      <%for(u of friends){%>
+
+      <li>
+        <a href="/users/profile/<%=u.to_user._id%>"> <%=u.to_user.name%> </a>
+      </li>
+
+      <%}%>
+    </ul>
+  </div>
 </main>
+
 <%} else {%>
 <aside>
   <div class="pic">
@@ -56,7 +69,20 @@
   <div class="info">
     <p>Name : <%=profile_user.name%></p>
     <p>Email : <%=profile_user.email%></p>
+    <p>
+      <%if(friend==true){%>
+
+      <a href="/users/add-friend?id=<%=profile_user.id%>" id="friend"
+        >Remove Friend</a
+      >
+      <%}else{%>
+      <a href="/users/add-friend?id=<%=profile_user.id%>" id="friend"
+        >Add Friend</a
+      >
+      <%}%>
+    </p>
   </div>
 </aside>
 
 <%}%>
+<script src="/js/toggle_friend.js"></script>

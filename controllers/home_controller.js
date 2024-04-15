@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const User = require("../models/user");
+const Friend = require("../models/friend");
 module.exports.home = async (req, res) => {
   try {
     /* const posts = await Post.find({});
@@ -18,8 +19,19 @@ module.exports.home = async (req, res) => {
         populate: {
           path: "user",
         },
+        populate: {
+          path: "likes",
+        },
       })
       .exec();
+    let friends;
+    if (req.user) {
+      friends = await Friend.find({ from_user: req.user.id }).populate([
+        "from_user",
+        "to_user",
+      ]);
+      console.log("friends", friends);
+    }
     if (posts) {
       const users = await User.find({});
       if (users) {
