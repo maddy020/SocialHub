@@ -40,7 +40,7 @@ const devlopment = {
 const production = {
   name: "production",
   asset_path: process.env.SOCIALHUB_ASSET_PATH,
-  db: "codeial_production",
+  db: process.env.SOCIALHUB_DB,
   session_cookie_key: process.env.SOCIALHUB_SESSION_COOKIE_KEY,
   smtp: {
     service: "gmail",
@@ -69,7 +69,7 @@ module.exports =
 // module.exports=devlopment
 
 // SOCIALHUB_ASSET_PATH=/assets
-// SOCIALHUB_DB= socialhub_production
+// SOCIALHUB_DB= codeial_production
 // SOCIALHUB_JWT_SECRET=DXAcWN26vHAYjll92nzSqYTi8wo93a4Y
 // SOCIALHUB_SESSION_COOKIE_KEY= RIaZDQKpFif69igvjBSYkBiwrVGkTldk
 // SOCIALHUB_GMAIL_USERNAME=we.socialhubsite@gmail.com
