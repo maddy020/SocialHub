@@ -2,8 +2,8 @@ const Comment = require("../models/comment");
 const Post = require("../models/post");
 const User = require("../models/user");
 const commentsMailer = require("../mailers/comments_mailer");
-const queue = require("../config/kue");
-const commentsEmailWorker = require("../workers/comment_email_worker");
+//const queue = require("../config/kue");
+//const commentsEmailWorker = require("../workers/comment_email_worker");
 const Like = require("../models/like");
 module.exports.create = async (req, res) => {
   try {
@@ -19,8 +19,8 @@ module.exports.create = async (req, res) => {
       comment = await comment.populate(["user , likes"]);
       post = await Post.findById(req.body.post).populate("user", "name email");
       //commentsMailer.newComment(comment);
-      //commentsMailer.newComment(post, comment);
-      const job = queue
+      commentsMailer.newComment(post, comment);
+      /* const job = queue
         .create("emails", { post, comment })
         .save(function (err) {
           if (err) {
@@ -28,7 +28,7 @@ module.exports.create = async (req, res) => {
             return;
           }
           //console.log(job.id, "manika");
-        });
+        }); */
       const user = await User.findById(req.user._id);
 
       post.comments.push(comment);
