@@ -8,9 +8,10 @@ const port = 8000;
 const cors = require("cors");
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
-const db = require("./config/mongoose");
+const mongoConnect = require("./config/mongoose");
 //used for session cookie
 //express-session is use to create the cookie(session) and encrypt it
+const db = mongoConnect();
 const session = require("express-session");
 
 const passport = require("passport");
