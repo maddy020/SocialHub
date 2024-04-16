@@ -11,7 +11,7 @@ module.exports.profile = async (req, res) => {
         "from_user",
         "to_user",
       ]);
-      console.log("friends", friends);
+      //console.log("friends", friends);
     }
     let existfr = await Friend.findOne({
       to_user: req.params.id,

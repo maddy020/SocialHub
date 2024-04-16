@@ -9,17 +9,17 @@ class ChatEngine {
   connectionHandler() {
     let t = this;
     this.socket.on("connect", function () {
-      console.log("connection established using sockets..."),
-        t.socket.emit("join_room", {
-          user_email: t.userEmail,
-          chatroom: "SocialHub",
-        }),
+      //console.log("connection established using sockets..."),
+      t.socket.emit("join_room", {
+        user_email: t.userEmail,
+        chatroom: "SocialHub",
+      }),
         t.socket.emit("join_room", {
           user_email: t.userEmail,
           chatroom: "SocialHub",
         }),
         t.socket.on("user_joined", function (e) {
-          console.log("a user joined", e);
+          //console.log("a user joined", e);
         });
     }),
       $("#send-message").click(function () {
@@ -32,7 +32,7 @@ class ChatEngine {
           });
       }),
       t.socket.on("receive_message", function (e) {
-        console.log("message received", e.message);
+        //console.log("message received", e.message);
         var s = $("<li>");
         let o = "other-message";
         e.user_email == t.userEmail && (o = "self-message"),

@@ -6,12 +6,12 @@ module.exports.chatSockets = function (socketServer) {
   });
   // whenever a requestes is received it acctomaticals emits the response.
   io.sockets.on("connection", function (socket) {
-    console.log("New connection received", socket.id);
+    //console.log("New connection received", socket.id);
     socket.on("disconnect", function () {
-      console.log("socket disconnected");
+      //console.log("socket disconnected");
     });
     socket.on("join_room", function (data) {
-      console.log("joining request rec.", data);
+      //console.log("joining request rec.", data);
 
       socket.join(data.chatroom);
 

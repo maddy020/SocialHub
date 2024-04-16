@@ -11,13 +11,13 @@ module.exports.friendship = async function (req, res) {
     let deleted = false;
 
     if (existingFriend) {
-      console.log("already a friend");
+      //console.log("already a friend");
       fromUser.friends.pull(existingFriend._id);
       fromUser.save();
       await Friend.findByIdAndDelete(existingFriend._id);
       deleted = true;
     } else {
-      console.log("not  a friend");
+      //console.log("not  a friend");
       let friendship = await Friend.create({
         from_user: req.user.id,
         to_user: req.query.id,

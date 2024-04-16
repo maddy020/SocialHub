@@ -24,7 +24,7 @@ const customMware = require("./config/middleware");
 const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_socket").chatSockets(chatServer);
 chatServer.listen(5000);
-console.log("Chat server is listening on port 5000");
+//console.log("Chat server is listening on port 5000");
 if (env.name == "devlopment") {
   app.use(
     sassMiddleware({
@@ -37,8 +37,8 @@ if (env.name == "devlopment") {
   );
 }
 
-console.log(path.join(__dirname, env.asset_path, "scss"));
-console.log(path.join(__dirname, env.asset_path, "css"));
+//console.log(path.join(__dirname, env.asset_path, "scss"));
+//console.log(path.join(__dirname, env.asset_path, "css"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(env.asset_path));
@@ -66,7 +66,7 @@ app.use(
         if (err) {
           console.error("Error while setting up MongoStore:", err);
         } else {
-          console.log("MongoStore set up successfully");
+          //console.log("MongoStore set up successfully");
         }
       }
     ),
@@ -90,5 +90,5 @@ app.listen(port, async (err) => {
     console.log(`error while connecting server ${err}`);
     return;
   }
-  console.log("Server is running on port", port);
+  //console.log("Server is running on port", port);
 });

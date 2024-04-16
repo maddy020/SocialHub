@@ -10,5 +10,5 @@ router.use("/comments", require("./comments"));
 router.use("/api", require("./api"));
 router.use("/auth", require("./auth"));
 router.use("/likes", require("./likes"));
-console.log("Router Loaded");
+//console.log("Router Loaded");
 module.exports = router;

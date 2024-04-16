@@ -30,7 +30,7 @@ module.exports.home = async (req, res) => {
         "from_user",
         "to_user",
       ]);
-      console.log("friends", friends);
+      //console.log("friends", friends);
     }
     if (posts) {
       const users = await User.find({});
