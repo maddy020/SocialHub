@@ -1,5 +1,3 @@
-// Corrected import statement
-import * as sassLibrary from "sass";
 import gulp from "gulp";
 import gulpSass from "gulp-sass";
 import cssnano from "gulp-cssnano";
@@ -7,76 +5,69 @@ import uglify from "gulp-uglify";
 import rev from "gulp-rev";
 import imagemin from "gulp-imagemin";
 import del from "delete";
+import * as sassLibrary from "sass";
 
 const sass = gulpSass(sassLibrary);
 
-// CSS task
+// CSS Task
 gulp.task("css", function () {
-  console.log("minifying css...");
   return gulp
     .src("./assets/scss/**/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(cssnano())
     .pipe(rev())
-    .pipe(gulp.dest("./public/assets/css"))
+    .pipe(gulp.dest("./public/assets")) // Saving revised CSS in a subdirectory
     .pipe(
-      rev.manifest({
-        cwd: "public",
-        merge: true,
+      rev.manifest("./public/assets/rev-manifest.json", {
+        base: process.cwd() + "./public/assets",
+        merge: true, // Merge with existing manifest if present
       })
     )
-    .pipe(gulp.dest("./public/assets/css"));
+    .pipe(gulp.dest("./public/assets")); // Saving manifest in the specified 'dist' directory
 });
 
-// JavaScript task
-gulp.task("js", () => {
+// JavaScript Task
+gulp.task("js", function () {
   return gulp
-    .src("./assets/js/*.js")
-    .pipe(uglify())
+    .src("./assets/js/**/*.js")
+    .pipe(
+      uglify().on("error", function (e) {
+        console.error(e);
+      })
+    )
     .pipe(rev())
-    .pipe(gulp.dest("./public/assets/js"))
+    .pipe(gulp.dest("./public/assets")) // Saving revised JS in a subdirectory
     .pipe(
-      rev.manifest({
-        cwd: "public",
+      rev.manifest("./public/assets/rev-manifest.json", {
+        base: process.cwd() + "./public/assets",
         merge: true,
       })
     )
-    .pipe(gulp.dest("./public/assets/js"));
+    .pipe(gulp.dest("./public/assets"));
 });
 
-// Image optimization task
-gulp.task("images", () => {
+// Image Minification Task
+gulp.task("images", function () {
   return gulp
-    .src("./assets/images/**/*.{png,jpg}")
+    .src("./assets/images/**/*.{png,jpg,svg,gif,jpeg}")
     .pipe(imagemin())
     .pipe(rev())
-    .pipe(gulp.dest("./public/assets/images"))
+    .pipe(gulp.dest("./public/assets")) // Saving revised images in a subdirectory
     .pipe(
-      rev.manifest({
-        cwd: "public",
+      rev.manifest("./public/assets/rev-manifest.json", {
+        base: process.cwd() + "./public/assets",
         merge: true,
       })
     )
-    .pipe(gulp.dest("./public/assets/images"));
+    .pipe(gulp.dest("./public/assets"));
 });
 
-// Clean assets task
-gulp.task("clean:assets", (done) => {
-  del.sync("./public/assets");
-  done(); // Signal completion by invoking the callback
+// Clean Task
+gulp.task("clean:assets", function () {
+  return del(["./public/assets", "./public/assets/rev-manifest.json"], {
+    force: true,
+  });
 });
 
-// Build task
-gulp.task(
-  "build",
-  gulp.series(
-    "clean:assets",
-    "css",
-    "js",
-    "images",
-
-    function (done) {
-      done();
-    }
-  )
-);
+// Build Task
+gulp.task("build", gulp.series("clean:assets", "css", "js", "images"));

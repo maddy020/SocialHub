@@ -1,4 +1,34 @@
-{let e=function(){let t=$("#new-post-form");t.submit(function(e){e.preventDefault(),$.ajax({type:"post",url:"/posts/create",data:t.serialize(),success:function(e){var t=s(e.data.post);$("#posts-list-container>ul").prepend(t),o($(" .delete-post-button"),t),new PostComments(e.data.post._id),new ToggleLike($(" .likes",t)),new Noty({theme:"relax",text:"Post Published!",type:"success",layout:"topRight",timeout:1500}).show()},error:function(e){console.log(e.responseText)}})})},s=function(e){return $(`<li id="post-${e._id}" class="list">
+{
+  let e = function () {
+      let t = $("#new-post-form");
+      t.submit(function (e) {
+        e.preventDefault(),
+          $.ajax({
+            type: "post",
+            url: "/posts/create",
+            data: t.serialize(),
+            success: function (e) {
+              var t = s(e.data.post);
+              $("#posts-list-container>ul").prepend(t),
+                o($(" .delete-post-button"), t),
+                new PostComments(e.data.post._id),
+                new ToggleLike($(" .likes", t)),
+                new Noty({
+                  theme: "relax",
+                  text: "Post Published!",
+                  type: "success",
+                  layout: "topRight",
+                  timeout: 1500,
+                }).show();
+            },
+            error: function (e) {
+              console.log(e.responseText);
+            },
+          });
+      });
+    },
+    s = function (e) {
+      return $(`<li id="post-${e._id}" class="list">
   <div class="content">
     <div class="post-content">${e.content}</div>
 
@@ -48,4 +78,39 @@
   </div>
 </li>
 
-`)},o=function(t){$(t).click(function(e){e.preventDefault(),$.ajax({type:"get",url:$(t).prop("href"),success:function(e){$("#post-"+e.data.post_id).remove(),new Noty({theme:"relax",text:"Post Deleted!",type:"error",layout:"topRight",timeout:1500}).show()},error:function(e){console.log("Error while deleting",e.responseText)}})})},t=function(){$(".list").each(function(){var e=$(this),t=$(" .delete-post-button",e),t=(o(t),e.prop("id").split("-")[1]);new PostComments(t),new ToggleLike($(" .likes",e)),new ToggleLike($(" .comment-likes",e))})};e(),t()}
+`);
+    },
+    o = function (t) {
+      $(t).click(function (e) {
+        e.preventDefault(),
+          $.ajax({
+            type: "get",
+            url: $(t).prop("href"),
+            success: function (e) {
+              $("#post-" + e.data.post_id).remove(),
+                new Noty({
+                  theme: "relax",
+                  text: "Post Deleted!",
+                  type: "error",
+                  layout: "topRight",
+                  timeout: 1500,
+                }).show();
+            },
+            error: function (e) {
+              console.log("Error while deleting", e.responseText);
+            },
+          });
+      });
+    },
+    t = function () {
+      $(".list").each(function () {
+        var e = $(this),
+          t = $(" .delete-post-button", e),
+          t = (o(t), e.prop("id").split("-")[1]);
+        new PostComments(t),
+          new ToggleLike($(" .likes", e)),
+          new ToggleLike($(" .comment-likes", e));
+      });
+    };
+  e(), t();
+}

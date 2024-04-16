@@ -1,12 +1,16 @@
-<link rel="stylesheet" href="/css/profile.css" type="text/css" />
-<link rel="stylesheet" href="/css/profileasside.css" type="text/css" />
+<link rel="stylesheet" href="<%=assetPath('profile.css')%>" type="text/css" />
+<link
+  rel="stylesheet"
+  href="<%=assetPath('profileasside.css')%>"
+  type="text/css"
+/>
 <% if(user.id == profile_user.id) {%>
 <main>
   <div class="pic">
     <% if(profile_user.avatar){%>
     <img src="<%=profile_user.avatar%>" alt="<%=user.name%>" />
     <%} else{%>
-    <img src="/images/sm.jpg" alt="<%=user.name%>" />
+    <img src="/images/ssm.jpg" alt="<%=user.name%>" />
     <% }%>
     <div class="info">
       <p>Name : <%=profile_user.name%></p>
@@ -63,7 +67,7 @@
     <% if(profile_user.avatar){%>
     <img src="<%=profile_user.avatar%>" alt="<%=user.name%>" />
     <%} else{%>
-    <img src="/images/sm.jpg" alt="<%=user.name%>" />
+    <img src="images/sm.jpg" alt="<%=user.name%>" />
     <% }%>
   </div>
   <div class="info">
@@ -72,11 +76,11 @@
     <p>
       <%if(friend==true){%>
 
-      <a href="/users/add-friend?id=<%=profile_user.id%>" id="friend"
+      <a href="/users/add-friend?id=<%=profile_user._id%>" id="friend"
         >Remove Friend</a
       >
       <%}else{%>
-      <a href="/users/add-friend?id=<%=profile_user.id%>" id="friend"
+      <a href="/users/add-friend?id=<%=profile_user._id%>" id="friend"
         >Add Friend</a
       >
       <%}%>
@@ -85,4 +89,7 @@
 </aside>
 
 <%}%>
-<script src="/js/toggle_friend.js" type="text/javascript"></script>
+<script
+  src="<%=assetPath('toggle_friend.js')%>"
+  type="text/javascript"
+></script>
