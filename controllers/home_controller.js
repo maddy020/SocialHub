@@ -16,12 +16,7 @@ module.exports.home = async (req, res) => {
       .populate({
         path: "comments",
         options: { sort: { createdAt: -1 } },
-        populate: {
-          path: "user",
-        },
-        populate: {
-          path: "likes",
-        },
+        populate: [{ path: "user" }, { path: "likes" }],
       })
       .exec();
     let friends;
@@ -32,6 +27,7 @@ module.exports.home = async (req, res) => {
       ]);
       //console.log("friends", friends);
     }
+    //console.log(posts);
     if (posts) {
       const users = await User.find({});
       if (users) {
